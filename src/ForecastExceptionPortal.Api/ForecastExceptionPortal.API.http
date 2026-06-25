@@ -1,0 +1,6 @@
+@ForecastExceptionPortal.API_HostAddress = http://localhost:5299
+
+GET {{ForecastExceptionPortal.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
