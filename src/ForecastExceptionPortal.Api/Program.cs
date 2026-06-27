@@ -53,9 +53,21 @@ app.MapGet("/api/health", () =>
     });
 });
 
-app.MapGet("/api/exceptions", () =>
+app.MapGet("/api/exceptions", (string? status, string? severity) =>
 {
-    return Results.Ok(exceptions);
+    var filteredExceptions = exceptions.AsEnumerable();
+
+    if (!string.IsNullOrWhiteSpace(status))
+    {
+        filteredExceptions = filteredExceptions.Where(e => e.Status.Equals(status, StringComparison.OrdinalIgnoreCase));
+    }
+
+    if (!string.IsNullOrWhiteSpace(severity))
+    {
+        filteredExceptions = filteredExceptions.Where(e => e.Severity.Equals(severity, StringComparison.OrdinalIgnoreCase));
+    }
+
+    return Results.Ok(filteredExceptions.ToList());
 });
 
 app.MapGet("/api/exceptions/{id:int}", (int id) =>
