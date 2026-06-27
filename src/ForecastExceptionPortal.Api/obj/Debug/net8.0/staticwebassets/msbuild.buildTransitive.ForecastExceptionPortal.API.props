@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\ForecastExceptionPortal.API.props" />
-</Project>
