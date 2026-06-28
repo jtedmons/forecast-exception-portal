@@ -1,5 +1,6 @@
 using ForecastExceptionPortal.Api.Models;
 using ForecastExceptionPortal.Api.Requests;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -130,5 +131,30 @@ app.MapPatch("/api/exceptions/{id:int}/status", (int id, UpdateExceptionStatusRe
 
 });
 
+app.MapPatch("/api/exceptions/{id:int}/assignment", (int id, UpdateExceptionAssignmentRequest request) =>
+{
+    var exceptionIndex = exceptions.FindIndex(e => e.Id == id);
+    if (exceptionIndex == -1)
+    {
+        return Results.NotFound();
+    }
+
+    var exceptionRecord = exceptions[exceptionIndex];
+
+    if (string.IsNullOrWhiteSpace(request.AssignedTo))
+    {
+        return Results.BadRequest("Owner cannot be null or empty.");
+    }
+
+    var updatedOwner = request.AssignedTo.Trim();
+
+    var updatedExceptionRecord = exceptionRecord with
+    {
+        AssignedTo = updatedOwner
+    };
+    exceptions[exceptionIndex] = updatedExceptionRecord;
+    return Results.Ok(updatedExceptionRecord);
+
+});
 
 app.Run();
