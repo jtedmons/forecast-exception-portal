@@ -1,4 +1,5 @@
 using ForecastExceptionPortal.Api.Models;
+using ForecastExceptionPortal.Api.Requests;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -85,5 +86,49 @@ app.MapGet("/api/exceptions/status/{status}", (string status) =>
 
     return Results.Ok(matchingExceptions);
 });
+
+app.MapPatch("/api/exceptions/{id:int}/status", (int id, UpdateExceptionStatusRequest request) =>
+{
+    var exceptionIndex = exceptions.FindIndex(e => e.Id == id);
+    if (exceptionIndex == -1)
+    {
+        return Results.NotFound();
+    }
+
+    var exceptionRecord = exceptions[exceptionIndex];
+
+    if (string.IsNullOrWhiteSpace(request.Status))
+    {
+        return Results.BadRequest("Status cannot be null or empty.");
+    }
+
+    string updatedStatus;
+
+    if (request.Status.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        updatedStatus = "New";
+    }
+    else if (request.Status.Equals("Investigating", StringComparison.OrdinalIgnoreCase))
+    {
+        updatedStatus = "Investigating";
+    }
+    else if (request.Status.Equals("Resolved", StringComparison.OrdinalIgnoreCase))
+    {
+        updatedStatus = "Resolved";
+    }
+    else
+    {
+        return Results.BadRequest("Invalid status value. Allowed values are: New, Investigating, Resolved.");
+    }
+
+    var updatedExceptionRecord = exceptionRecord with
+    {
+        Status = updatedStatus
+    };
+    exceptions[exceptionIndex] = updatedExceptionRecord;
+    return Results.Ok(updatedExceptionRecord);
+
+});
+
 
 app.Run();
