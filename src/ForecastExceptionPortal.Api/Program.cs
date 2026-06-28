@@ -158,3 +158,5 @@ app.MapPatch("/api/exceptions/{id:int}/assignment", (int id, UpdateExceptionAssi
 });
 
 app.Run();
+
+public partial class Program { }

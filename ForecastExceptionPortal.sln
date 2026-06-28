@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EB0AEA1C-691
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForecastExceptionPortal.Api", "src\ForecastExceptionPortal.Api\ForecastExceptionPortal.Api.csproj", "{7F194ABD-5824-48DF-8A22-F34D17D91E00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4333A5FB-6D90-4E73-AEC4-3151B2270E84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForecastExceptionPortal.Api.Tests", "tests\ForecastExceptionPortal.Api.Tests\ForecastExceptionPortal.Api.Tests.csproj", "{4BB0485A-81BB-4B1C-BC57-78E3E3217D51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +24,13 @@ Global
 		{7F194ABD-5824-48DF-8A22-F34D17D91E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F194ABD-5824-48DF-8A22-F34D17D91E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F194ABD-5824-48DF-8A22-F34D17D91E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BB0485A-81BB-4B1C-BC57-78E3E3217D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB0485A-81BB-4B1C-BC57-78E3E3217D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB0485A-81BB-4B1C-BC57-78E3E3217D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB0485A-81BB-4B1C-BC57-78E3E3217D51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7F194ABD-5824-48DF-8A22-F34D17D91E00} = {EB0AEA1C-6914-4EBD-A366-A6E6C559960C}
+		{4BB0485A-81BB-4B1C-BC57-78E3E3217D51} = {4333A5FB-6D90-4E73-AEC4-3151B2270E84}
 	EndGlobalSection
 EndGlobal
