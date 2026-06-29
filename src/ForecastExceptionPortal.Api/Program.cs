@@ -157,6 +157,25 @@ app.MapPatch("/api/exceptions/{id:int}/assignment", (int id, UpdateExceptionAssi
 
 });
 
+app.MapDelete("/api/exceptions/{id:int}/assignment", (int id) =>
+{
+    var exceptionIndex = exceptions.FindIndex(e => e.Id == id);
+    if (exceptionIndex == -1)
+    {
+        return Results.NotFound();
+    }
+
+    var exceptionRecord = exceptions[exceptionIndex];
+
+    var updatedExceptionRecord = exceptionRecord with
+    {
+        AssignedTo = null
+    };
+    exceptions[exceptionIndex] = updatedExceptionRecord;
+    return Results.Ok(updatedExceptionRecord);
+
+});
+
 app.Run();
 
 public partial class Program { }
