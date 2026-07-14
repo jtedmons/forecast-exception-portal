@@ -6,36 +6,36 @@ public class ExceptionService
 {
     private readonly List<ExceptionRecord> _exceptions = new()
     {
-        new(
-            Id: 1,
-            LocationName: "Store 183",
-            BusinessDate: new DateTime(2026, 6, 15),
-            Sales: 8450.25m,
-            ExpectedSales: 10250.00m,
-            SalesVariancePct: -0.1756m,
-            Customers: 812,
-            ExpectedCustomers: 950,
-            CustomersVariancePct: -0.1453m,
-            ExceptionScore: 0.42m,
-            Severity: "At Risk",
-            Status: "New",
-            AssignedTo: null
-        ),
-        new(
-            Id: 2,
-            LocationName: "Store 421",
-            BusinessDate: new DateTime(2026, 6, 15),
-            Sales: 12200.00m,
-            ExpectedSales: 9800.00m,
-            SalesVariancePct: 0.2449m,
-            Customers: 1105,
-            ExpectedCustomers: 925,
-            CustomersVariancePct: 0.1946m,
-            ExceptionScore: 0.51m,
-            Severity: "Critical",
-            Status: "Investigating",
-            AssignedTo: "Josh"
-        )
+        new ExceptionRecord{
+            Id =1,
+            LocationName = "Store 183",
+            BusinessDate = new DateTime(2026, 6, 15),
+            Sales = 8450.25m,
+            ExpectedSales = 10250.00m,
+            SalesVariancePct = -0.1756m,
+            Customers = 812,
+            ExpectedCustomers = 950,
+            CustomersVariancePct = -0.1453m,
+            ExceptionScore = 0.42m,
+            Severity = "At Risk",
+            Status = "New",
+            AssignedTo = null
+        },
+        new ExceptionRecord{
+            Id = 2,
+            LocationName = "Store 421",
+            BusinessDate = new DateTime(2026, 6, 15),
+            Sales = 12200.00m,
+            ExpectedSales = 9800.00m,
+            SalesVariancePct = 0.2449m,
+            Customers = 1105,
+            ExpectedCustomers = 925,
+            CustomersVariancePct = 0.1946m,
+            ExceptionScore = 0.51m,
+            Severity = "Critical",
+            Status = "Investigating",
+            AssignedTo = "Josh"
+        }
     };
 
     public List<ExceptionRecord> GetAll(string? status, string? severity)
@@ -72,14 +72,9 @@ public class ExceptionService
 
         var exceptionRecord = _exceptions[exceptionIndex];
 
-        var updatedExceptionRecord = exceptionRecord with
-        {
-            Status = newStatus
-        };
+        exceptionRecord.Status = newStatus;
 
-        _exceptions[exceptionIndex] = updatedExceptionRecord;
-
-        return updatedExceptionRecord;
+        return exceptionRecord;
     }
 
     public ExceptionRecord? UpdateAssignment(int id, string newAssignedTo)
@@ -92,14 +87,9 @@ public class ExceptionService
 
         var exceptionRecord = _exceptions[exceptionIndex];
 
-        var updatedExceptionRecord = exceptionRecord with
-        {
-            AssignedTo = newAssignedTo
-        };
+        exceptionRecord.AssignedTo = newAssignedTo;
 
-        _exceptions[exceptionIndex] = updatedExceptionRecord;
-
-        return updatedExceptionRecord;
+        return exceptionRecord;
     }
     public ExceptionRecord? ClearAssignment(int id)
     {
@@ -111,13 +101,8 @@ public class ExceptionService
 
         var exceptionRecord = _exceptions[exceptionIndex];
 
-        var updatedExceptionRecord = exceptionRecord with
-        {
-            AssignedTo = null
-        };
+        exceptionRecord.AssignedTo = null;
 
-        _exceptions[exceptionIndex] = updatedExceptionRecord;
-
-        return updatedExceptionRecord;
+        return exceptionRecord;
     }
 }
