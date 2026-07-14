@@ -1,17 +1,26 @@
 using ForecastExceptionPortal.Api.Models;
 using ForecastExceptionPortal.Api.Requests;
 using ForecastExceptionPortal.Api.Services;
+using ForecastExceptionPortal.Api.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ExceptionService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=forecast-exceptions.db");
+}
+);
 
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+
 
 
 app.MapGet("/api/health", () =>
